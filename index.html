@@ -1,10 +1,120 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title></title>
+		<meta charset="utf-8" />
+		<title>请按照要求依次点击点击动物</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-	<body>
-		Hello world!
+	<body bgcolor="blanchedalmond">
+		<div id="app">
+			<img src="img/animals.jpeg" @click="show()" style="width: 300px;height: 300px;" title="请点击动物">
+			<p>请按照生肖顺序依次点击前五个生肖，完成验证</p>
+			<p>错误将会给出提示，直到能够以正确的顺序点击生肖</p>
+			<p>听一首歌，放松一下吧~</p>
+			<bgsound src="img/1.mp3" autostart loop="-1" />
+			<!-- 后台背景音乐 autostart 是自动播放的意思 loop是循环播放次数，-1是无限循环的意思 -->
+			<embed src="img/1.mp3" width="1000" height="100"></embed>
+			<!-- 插件听歌的代码，可以在网页中显示一个播放停止的按钮。 -->
+		</div>
+		<script type="text/javascript">
+			let v=new Vue({
+				el:"#app",
+				data:{
+					flag:0,
+					clickX:0,
+					clickY:0
+				},
+				methods:{
+					show(){
+						console.log(event.clientX+","+event.clientY);
+						console.log("v.flag="+v.flag);
+						v.clickX=event.clientX;
+						v.clickY=event.clientY;
+						
+						//老鼠minXY(24,27),maxXY(76,101)
+						if(v.flag==0){
+							if(v.clickX>24&&v.clickX<76&&v.clickY>27&&v.clickY<101){
+								console.log("===================================第一次点击条件判断================================");
+								console.log("x,y="+v.clickX+","+v.clickY);
+								alert("老鼠点正确，吱吱吱，请点击下一个生肖~");
+								v.flag=1;
+							}
+							else{
+								alert("老鼠点错误，请再认真查看哦~");
+								v.flag=0;
+							}
+						}
+						
+						
+						//牛minXY(105,35),maxXY(136,97)
+						else if(v.flag==1){
+							if(v.clickX>105&&v.clickX<136&&v.clickY>35&&v.clickY<97){
+								//鼠标点击的坐标
+								console.log("===================================第二次点击条件判断================================");
+								console.log("x,y="+v.clickX+","+v.clickY);
+								alert("牛点击正确，哞哞哞，请点击下一个生肖~");
+								v.flag=2;
+							}
+							else{
+								v.flag=1;
+								alert("牛点击错误，不认识了吗，再试试看哦~");
+							}
+						}
+						
+						
+						//老虎minXY(161,29),maxXY(203,102)	
+						else if(v.flag==2){
+							if(v.flag==2&&v.clickX>161&&v.clickX<203&&v.clickY>29&&v.clickY<102){
+								//鼠标点击的坐标
+								console.log("===================================第三次点击条件判断================================");
+								console.log("x,y="+v.clickX+","+v.clickY);
+								alert("老虎点击正确，嗷呜，请点击下一个生肖~");
+								v.flag=3;
+							}
+							else{
+								v.flag=2;
+								alert("老虎点击错误，不发威你当我是小猫嘛！");
+							}
+							
+						}
+						
+						
+						//兔子minXY(222,18),maxXY(292,111)
+						else if(v.flag==3){
+							if(v.flag==3&&v.clickX>222&&v.clickX<292&&v.clickY>18&&v.clickY<111){
+								//鼠标点击的坐标
+								console.log("===================================第四次点击条件判断================================");
+								console.log("x,y="+v.clickX+","+v.clickY);
+								alert("兔子点击正确，***，请点击下一个生肖~");
+								v.flag=4;
+							}
+							else{
+								v.flag=3;
+								alert("兔子点击错误，想想红烧兔头~");
+							}
+							
+						}
+						
+						
+						//龙minXY(12,115),maxXY(86,206)
+						else if(v.flag==4){
+							if(v.flag==4&&v.clickX>12&&v.clickX<86&&v.clickY>115&&v.clickY<206){
+								//鼠标点击的坐标
+								console.log("===================================第三次点击条件判断================================");
+								console.log("x,y="+v.clickX+","+v.clickY);
+								alert("龙点击正确，恭喜你成为下一代龙的传人");
+								alert("恭喜，验证成功~！");
+								v.flag=5;
+							}
+							else{
+								v.flag=4;
+								alert("龙点击错误，重开吧");
+							}
+						}
+
+					}
+				}
+			})
+		</script>
 	</body>
 </html>
